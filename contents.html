@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contents — TankopaniJam</title>
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="contents">
+  <div id="site-header"></div>
+
+  <main class="page">
+    <p class="page__eyebrow">Table of Contents</p>
+    <h1 class="page__title">Everything in the Jam</h1>
+    <p class="page__lead">
+      Click any card to jump to that section. The logo at the top-left brings you back home,
+      and throughout the site key words are <span class="xlink">hyperlinked</span> to their
+      description pages — just like the original deck.
+    </p>
+
+    <div class="toc-grid" id="toc-grid"></div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/site.js"></script>
+  <script>
+    document.addEventListener("tankopani:ready", function () {
+      var grid = document.getElementById("toc-grid");
+      window.TANKOPANI_PAGES.forEach(function (p, i) {
+        var a = document.createElement("a");
+        a.className = "toc-card";
+        a.href = window.TANKOPANI_HREF(p.slug);
+        a.innerHTML =
+          '<div class="toc-card__num">' + String(i + 1).padStart(2, "0") + '</div>' +
+          '<div class="toc-card__title">' + p.title + '</div>' +
+          '<div class="toc-card__desc">' + p.desc + '</div>';
+        grid.appendChild(a);
+      });
+    });
+  </script>
+</body>
+</html>

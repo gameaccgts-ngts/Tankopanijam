@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Judging Rubric — TankopaniJam</title>
+  <link rel="icon" href="../assets/img/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="rubric">
+  <div id="site-header"></div>
+
+  <main class="page">
+    <p class="page__eyebrow">Criteria for Judging · Scorecard</p>
+    <h1 class="page__title">Judging Rubric</h1>
+    <p class="page__lead">
+      A live scorecard built from the three <a class="xlink" href="judging-criteria.html">measures</a> —
+      <strong>Alfred</strong> (technology), <strong>Jessie</strong> (education), and
+      <strong>Alicia</strong> (design). Score each criterion 0–5; totals update as you go.
+      The highest measure scores decide the <a class="xlink" href="awards.html">Alfred, Jessie &amp; Alicia awards</a>.
+    </p>
+
+    <div class="form-wrap">
+      <div class="form-row">
+        <div class="field">
+          <label for="judgeName">Judge</label>
+          <input id="judgeName" type="text" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="gameName">Game / Team</label>
+          <input id="gameName" type="text" placeholder="Game or team being scored">
+        </div>
+      </div>
+
+      <div class="rubric-intro">
+        <div class="score-scale">
+          <span><b>0</b> Missing</span>
+          <span><b>1</b> Poor</span>
+          <span><b>2</b> Fair</span>
+          <span><b>3</b> Good</span>
+          <span><b>4</b> Strong</span>
+          <span><b>5</b> Outstanding</span>
+        </div>
+      </div>
+
+      <div id="measures"></div>
+
+      <div class="rubric-total">
+        <span class="rubric-total__label">Total score</span>
+        <span class="rubric-total__value"><span id="grand">0</span><small> / <span id="grandMax">0</span> (<span id="grandPct">0</span>%)</small></span>
+      </div>
+
+      <div class="rubric-actions">
+        <button class="btn btn--primary btn--sm" id="export">Export scorecard</button>
+        <button class="btn btn--ghost btn--sm" id="reset">Reset scores</button>
+      </div>
+      <span class="form-status" id="rubric-status" role="status" aria-live="polite" style="display:block;margin-top:0.75rem"></span>
+    </div>
+
+    <h2 class="page__title" style="font-size:1.5rem;margin-top:3rem">Quick reference</h2>
+    <table class="rubric-table">
+      <thead>
+        <tr><th>Measure</th><th>Focus</th><th>Criteria</th><th>Max</th><th>Award</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Alfred</td><td>Technology</td><td>4</td><td>20</td><td>Alfred Award — most techy game</td></tr>
+        <tr><td>Jessie</td><td>Education</td><td>3</td><td>15</td><td>Jessie Award — most educational game</td></tr>
+        <tr><td>Alicia</td><td>Design</td><td>3</td><td>15</td><td>Alicia Award — best designed game</td></tr>
+      </tbody>
+    </table>
+
+    <div id="site-pager"></div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/rubric.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team Sign-Up — TankopaniJam</title>
+  <link rel="icon" href="../assets/img/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="team-signup">
+  <div id="site-header"></div>
+
+  <main class="page">
+    <p class="page__eyebrow">Register your team</p>
+    <h1 class="page__title">Team Sign-Up</h1>
+    <p class="page__lead">
+      Five teams compete. Each team has 2–5 college students, one sponsor, and a GPA of 3.0+.
+      Review the <a class="xlink" href="participation-requirements.html">participation requirements</a>
+      and <a class="xlink" href="who.html">team rules</a> before you register.
+    </p>
+
+    <form class="form-wrap" id="signup-form" novalidate>
+      <!-- Team -->
+      <fieldset class="fieldset">
+        <legend>🎮 Team</legend>
+        <div class="form-row">
+          <div class="field">
+            <label for="teamName">Team name <span class="req">*</span></label>
+            <input id="teamName" name="teamName" type="text" required placeholder="e.g. Estate Engineers" autocomplete="off">
+            <span class="field__error" data-for="teamName"></span>
+          </div>
+          <div class="field">
+            <label for="school">School <span class="req">*</span></label>
+            <input id="school" name="school" type="text" required placeholder="College / university name">
+            <span class="field__error" data-for="school"></span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="engine">Game engine <span class="req">*</span></label>
+            <select id="engine" name="engine" required>
+              <option value="">Select…</option>
+              <option value="Unity">Unity (preferred)</option>
+              <option value="Unreal">Unreal Engine</option>
+              <option value="Godot">Godot</option>
+              <option value="GameMaker">GameMaker</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="hint">Any engine is allowed, but Unity is preferred.</span>
+            <span class="field__error" data-for="engine"></span>
+          </div>
+          <div class="field">
+            <label for="platform">Target platform <span class="req">*</span></label>
+            <select id="platform" name="platform" required>
+              <option value="">Select…</option>
+              <option value="Windows">Windows</option>
+              <option value="Web">Web</option>
+              <option value="Windows + Web">Windows + Web</option>
+            </select>
+            <span class="hint">Games must run on Windows or Web.</span>
+            <span class="field__error" data-for="platform"></span>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Members -->
+      <fieldset class="fieldset">
+        <legend>👥 Team members <span class="hint" style="font-weight:400">(2–5)</span></legend>
+        <div class="members" id="members"></div>
+        <button type="button" class="member-add" id="add-member">+ Add member</button>
+        <span class="field__error" data-for="members"></span>
+      </fieldset>
+
+      <!-- Sponsor -->
+      <fieldset class="fieldset">
+        <legend>📣 Team sponsor</legend>
+        <div class="form-row">
+          <div class="field">
+            <label for="sponsorName">Sponsor name <span class="req">*</span></label>
+            <input id="sponsorName" name="sponsorName" type="text" required placeholder="Person or organization">
+            <span class="field__error" data-for="sponsorName"></span>
+          </div>
+          <div class="field">
+            <label for="sponsorType">Sponsor type <span class="req">*</span></label>
+            <select id="sponsorType" name="sponsorType" required>
+              <option value="">Select…</option>
+              <option value="School">School</option>
+              <option value="Corporate">Corporate</option>
+            </select>
+            <span class="field__error" data-for="sponsorType"></span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="sponsorEmail">Sponsor email <span class="req">*</span></label>
+            <input id="sponsorEmail" name="sponsorEmail" type="email" required placeholder="sponsor@example.com">
+            <span class="field__error" data-for="sponsorEmail"></span>
+          </div>
+          <div class="field">
+            <label for="fundraisingGoal">Fundraising goal</label>
+            <input id="fundraisingGoal" name="fundraisingGoal" type="number" min="200" step="50" value="200">
+            <span class="hint">Each team must raise at least $200 by the end of the event.</span>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Attestations -->
+      <fieldset class="fieldset">
+        <legend>✅ Confirm</legend>
+        <div class="field field--check">
+          <input id="gpa" name="gpa" type="checkbox" required>
+          <label for="gpa">All members are enrolled in college in a related field with a <strong>GPA of 3.0 or higher</strong>. <span class="req">*</span></label>
+        </div>
+        <div class="field field--check">
+          <input id="present" name="present" type="checkbox" required>
+          <label for="present">Our team can be present for the full week and at both the kick-off and submission meetings. <span class="req">*</span></label>
+        </div>
+        <div class="field field--check">
+          <input id="legal" name="legal" type="checkbox" required>
+          <label for="legal">We agree that all assets, code, scripts, and materials will have <strong>shared ownership</strong> with the participant and Nemours Estate. <span class="req">*</span></label>
+        </div>
+        <span class="field__error" data-for="attest"></span>
+      </fieldset>
+
+      <div class="form-foot">
+        <button type="submit" class="btn btn--primary">Submit Registration</button>
+        <span class="form-status" id="form-status" role="status" aria-live="polite"></span>
+      </div>
+    </form>
+
+    <!-- success view, hidden until submit -->
+    <div class="form-wrap form-success" id="success" hidden>
+      <div class="big">🏆</div>
+      <h2>Registration received!</h2>
+      <p>Thanks — your team has been registered for TankopaniJam. A copy has been saved and downloaded for your records.</p>
+      <dl class="summary-box" id="summary"></dl>
+      <div class="rubric-actions" style="justify-content:center">
+        <a class="btn btn--ghost btn--sm" href="../contents.html">Back to Contents</a>
+        <button class="btn btn--ghost btn--sm" id="register-another" type="button">Register another team</button>
+      </div>
+    </div>
+
+    <div id="site-pager"></div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/signup.js"></script>
+</body>
+</html>
