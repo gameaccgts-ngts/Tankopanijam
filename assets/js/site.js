@@ -21,12 +21,12 @@
     { slug: "judging-day",               title: "Judging Day",             nav: true,  desc: "How judges work the rest day." },
     { slug: "patients",                  title: "Patients",                nav: false, desc: "The panel at the heart of the jam." },
     { slug: "game-requirements",         title: "Game Requirements",       nav: true,  desc: "What every submitted game must do." },
-    { slug: "theme",                     title: "Theme",                   nav: true,  desc: "One word, estate objects, and a tune." },
+    { slug: "theme",                     title: "Theme",                   nav: true,  desc: "One word, Estate objects, and a tune." },
     { slug: "check-ins",                 title: "Check-ins",               nav: true,  desc: "Six checkpoints across three days." },
     { slug: "awards",                    title: "Awards",                  nav: true,  desc: "Trophies, the Minors, and scholarships." },
     { slug: "judge-requirements",        title: "Judge Requirements",      nav: true,  desc: "What makes someone a TankopaniJam judge." },
     { slug: "roi",                       title: "Outcomes & ROI",          nav: true,  desc: "What students, patients & Nemours gain." },
-    { slug: "alfred",                    title: "Alfred — the Original AI",nav: false, desc: "A nod to the estate's namesake." }
+    { slug: "alfred",                    title: "Alfred — the Original AI",nav: false, desc: "A nod to the Estate's namesake." }
   ];
 
   function href(slug) { return ROOT + "pages/" + slug + ".html"; }
