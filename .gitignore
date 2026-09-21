@@ -3,5 +3,17 @@ Thumbs.db
 desktop.ini
 .DS_Store
 *.swp
+~ai-*.tmp
 .vscode/
 .idea/
+
+# Local media — source footage & full-res photography, too big for the repo
+videos/
+images/
+*.mp4
+*.mov
+*.webm
+*.mkv
+*.m4v
+*.avi
+*.wmv

@@ -1,36 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TankopaniJam — the Nemours Game Jam</title>
-  <meta name="description" content="TankopaniJam (aka the Nemours Game Jam): a 3-day college game jam built around the Estate, its patients, and Child Life.">
-  <link rel="icon" href="assets/img/logo.png">
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TankopaniJam — He left it to them.</title>
+<meta name="description" content="A hundred years ago Alfred I. duPont filled this place with everything he loved, then left it to children in medical treatment. Five college teams get seventy-two hours to build them a game out of it.">
+<link rel="icon" href="assets/img/logo/0.5x/Logo@0.5x.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Public+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0A0B0C;--void-2:#101214;--paper:#F2F1EC;--dim:#9BA0A4;
+  --brass:#C79A3E;--brass-dk:#8A6A2B;--line:#24282B;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--void);color:var(--paper);
+  font-family:'Public Sans',system-ui,-apple-system,sans-serif;
+  font-size:17px;line-height:1.55;overflow-x:hidden}
+
+/* ---------- HERO : one screen, one punch ---------- */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;
+  justify-content:center;padding:64px 30px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden;background:var(--void)}
+
+/* Estate carousel — three slides, cross-faded. 24s cycle, 8s apart. */
+.slide{position:absolute;inset:0;background-size:cover;background-position:center;
+  opacity:0;transform:scale(1.08);will-change:opacity,transform;
+  animation:heroFade 24s ease-in-out infinite,heroZoom 24s ease-in-out infinite}
+.slide:nth-child(1){background-image:url("assets/img/estate/bowling-alley.jpg");
+  filter:brightness(.95)}
+.slide:nth-child(2){background-image:url("assets/img/estate/library.jpg");
+  animation-delay:8s,8s;filter:blur(3px) brightness(.92)}
+.slide:nth-child(3){background-image:url("assets/img/estate/garage-rolls-royce.jpg");
+  animation-delay:16s,16s;filter:blur(1.5px) brightness(.92)}
+@keyframes heroFade{0%{opacity:0}3%{opacity:1}30%{opacity:1}33%{opacity:0}100%{opacity:0}}
+@keyframes heroZoom{0%{transform:scale(1.08)}33%{transform:scale(1.15)}
+  34%{transform:scale(1.08)}100%{transform:scale(1.08)}}
+.hero-bg::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,rgba(10,11,12,.96) 0%,rgba(10,11,12,.80) 52%,rgba(10,11,12,.52) 100%)}
+
+.hero-cap{position:absolute;right:30px;bottom:24px;z-index:2;height:13px;pointer-events:none}
+.hero-cap span{position:absolute;right:0;bottom:0;white-space:nowrap;opacity:0;
+  font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:#6A7073;
+  animation:heroFade 24s ease-in-out infinite}
+.hero-cap span:nth-child(2){animation-delay:8s}
+.hero-cap span:nth-child(3){animation-delay:16s}
+
+.hero-in{position:relative;z-index:2;max-width:1180px;margin:0 auto;width:100%}
+.kicker{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--brass);margin:0 0 22px;
+  max-width:58ch;line-height:1.9}
+.lockup{display:flex;align-items:center;gap:15px;margin:0 0 24px}
+.lockup img{width:clamp(56px,7vw,76px);height:auto;display:block;flex-shrink:0;
+  filter:drop-shadow(0 3px 14px rgba(0,0,0,.55))}
+.wordmark{font-family:'Fraunces',Georgia,serif;font-weight:600;
+  font-size:clamp(17px,2.2vw,24px);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--paper);margin:0;line-height:1}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:600;
+  font-size:clamp(44px,9vw,116px);line-height:.94;letter-spacing:-.035em;
+  margin:0 0 28px;max-width:13ch}
+h1 em{font-style:italic;color:var(--brass);display:block}
+.sub{font-size:clamp(17px,2vw,22px);color:var(--dim);max-width:46ch;
+  margin:0 0 44px;line-height:1.5}
+.sub strong{color:var(--paper);font-weight:600}
+
+.picks{display:grid;grid-template-columns:repeat(3,minmax(0,240px));gap:12px}
+.pick{display:block;text-decoration:none;border:1px solid var(--line);
+  background:rgba(16,18,20,.6);backdrop-filter:blur(6px);
+  padding:18px 20px;transition:border-color .2s,background .2s,transform .2s}
+.pick:hover{border-color:var(--brass);background:rgba(199,154,62,.08);transform:translateY(-2px)}
+.pick b{display:block;font-family:'Space Mono',monospace;font-size:9.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:8px}
+.pick span{display:block;font-family:'Fraunces',Georgia,serif;font-size:20px;
+  font-weight:600;letter-spacing:-.015em;color:var(--paper);line-height:1.15}
+
+.cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;
+  font-family:'Space Mono',monospace;font-size:12px;color:#5B6063}
+
+/* ---------- CREED : the statement everything branches from ---------- */
+.creed{padding:104px 30px 96px;background:var(--void);border-top:1px solid var(--line)}
+.creed-in{max-width:1180px;margin:0 auto}
+.creed-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brass-dk);margin:0 0 44px}
+.beats{display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--line)}
+.beat{padding:30px 34px 34px 0;border-right:1px solid var(--line)}
+.beat:nth-child(2){padding-left:34px}
+.beat:last-child{border-right:none;padding-right:0;padding-left:34px}
+.beat-n{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;
+  color:var(--brass-dk);margin:0 0 18px}
+.beat p{font-family:'Fraunces',Georgia,serif;font-weight:600;
+  font-size:clamp(21px,2.3vw,29px);line-height:1.2;letter-spacing:-.02em;
+  color:var(--paper);margin:0}
+.beat.now .beat-n{color:var(--brass)}
+.beat.now p{color:var(--brass);font-style:italic}
+.creed-tail{margin:48px 0 0;color:var(--dim);max-width:60ch;font-size:16.5px}
+.creed-tail strong{color:var(--paper);font-weight:600}
+.creed-tail .wm{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:16px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+
+/* ---------- DOORS ---------- */
+.doors{padding:96px 30px;background:var(--void-2);border-top:1px solid var(--line)}
+.doors-in{max-width:1180px;margin:0 auto}
+.lede{font-family:'Fraunces',Georgia,serif;font-size:clamp(24px,3.6vw,42px);
+  font-weight:600;line-height:1.14;letter-spacing:-.025em;margin:0 0 12px;max-width:24ch}
+.lede em{font-style:italic;color:var(--brass)}
+.lede-sub{color:var(--dim);margin:0 0 56px;max-width:54ch;font-size:16.5px}
+
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.door{background:var(--void);border:1px solid var(--line);padding:32px 28px 28px;
+  display:flex;flex-direction:column;transition:border-color .25s}
+.door:hover{border-color:var(--brass-dk)}
+.door-tag{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--brass);margin:0 0 18px}
+.door-echo{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;
+  font-size:15px;line-height:1.35;color:var(--brass-dk);margin:0 0 16px;
+  padding-bottom:16px;border-bottom:1px solid var(--line)}
+.door h2{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:26px;
+  line-height:1.12;letter-spacing:-.02em;margin:0 0 14px}
+.door>p{font-size:15px;color:var(--dim);margin:0 0 20px;line-height:1.56}
+.door ul{list-style:none;padding:0;margin:0 0 26px;border-top:1px solid var(--line)}
+.door li{font-size:13.5px;color:var(--dim);padding:9px 0;
+  border-bottom:1px solid var(--line);display:flex;gap:10px}
+.door li::before{content:'—';color:var(--brass-dk);flex-shrink:0}
+.btn{display:block;text-align:center;font-family:'Space Mono',monospace;font-size:10.5px;
+  letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:15px 20px;
+  text-decoration:none;border:1px solid var(--brass);color:var(--brass);
+  margin-top:auto;transition:background .2s,color .2s}
+.btn:hover{background:var(--brass);color:var(--void)}
+.btn.solid{background:var(--brass);color:var(--void)}
+.btn.solid:hover{background:var(--paper);border-color:var(--paper)}
+.deadline{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--brass-dk);margin:13px 0 0;text-align:center}
+
+/* ---------- THE WEEK ---------- */
+.week{padding:88px 30px 92px;background:var(--void);border-top:1px solid var(--line)}
+.week-in{max-width:1180px;margin:0 auto}
+.week-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brass-dk);margin:0 0 14px}
+.week h2{font-family:'Fraunces',Georgia,serif;font-weight:600;
+  font-size:clamp(24px,3vw,34px);line-height:1.14;letter-spacing:-.025em;margin:0 0 38px}
+.week-grid{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--line)}
+.day{padding:22px 16px 26px 0;border-right:1px solid var(--line)}
+.day+.day{padding-left:16px}
+.day:last-child{border-right:none;padding-right:0}
+.day-date{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--brass-dk);margin:0 0 12px}
+.day-name{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:17px;
+  line-height:1.2;letter-spacing:-.015em;color:var(--paper);margin:0 0 8px}
+.day-note{font-size:12.5px;color:var(--dim);margin:0;line-height:1.45}
+.day.build .day-date{color:var(--brass)}
+.day.finale .day-date,.day.finale .day-name{color:var(--brass)}
+.day.finale .day-name{font-style:italic}
+
+/* ---------- FOOTER ---------- */
+footer{padding:56px 30px 44px;background:var(--void);border-top:1px solid var(--line)}
+.foot-in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;
+  justify-content:space-between;gap:30px}
+footer .mark{font-family:'Fraunces',Georgia,serif;font-size:22px;font-weight:600;margin:0 0 8px}
+.foot-brand{display:flex;align-items:center;gap:13px;margin:0 0 10px}
+.foot-brand img{width:46px;height:auto;display:block;flex-shrink:0}
+.foot-brand .mark{margin:0}
+footer p{font-size:14px;color:var(--dim);margin:0 0 5px;max-width:38ch}
+footer a{color:var(--brass);text-decoration:none}
+footer a:hover{text-decoration:underline}
+.legal{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);
+  font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.04em;
+  color:#565B5E;max-width:78ch;line-height:1.75}
+
+@media (max-width:880px){
+  .picks{grid-template-columns:1fr;gap:10px;max-width:420px}
+  .grid3{grid-template-columns:1fr;gap:16px}
+  .beats{grid-template-columns:1fr}
+  .beat,.beat:nth-child(2),.beat:last-child{padding:26px 0;border-right:none;
+    border-bottom:1px solid var(--line)}
+  .beat:last-child{border-bottom:none;padding-bottom:0}
+  .beat-n{margin-bottom:12px}
+  .week-grid{grid-template-columns:1fr 1fr}
+  .day,.day+.day{padding:20px 14px 22px;border-bottom:1px solid var(--line)}
+  .day:nth-child(2n){border-right:none}
+  .day:nth-last-child(-n+2){border-bottom:none}
+  .hero{padding:56px 20px}
+  .creed{padding:72px 20px}
+  .week{padding:64px 20px}
+  .doors{padding:70px 20px}
+  .cue{display:none}
+  .hero-cap{right:20px;bottom:18px}
+  .hero-cap span{font-size:8.5px;letter-spacing:.12em}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+  .slide,.hero-cap span{animation:none!important}
+  .slide{opacity:0;transform:scale(1.02)}
+  .slide:nth-child(1),.hero-cap span:nth-child(1){opacity:1}
+}
+</style>
 </head>
-<body data-page="home">
-  <div id="site-header"></div>
+<body>
 
-  <main>
-    <section class="hero">
-      <div>
-        <img class="hero__logo" src="assets/img/logo.png" alt="TankopaniJam — Game Jam badge logo">
-        <p class="subtitle">aka the Nemours Game Jam</p>
-        <h1>TankopaniJam</h1>
-        <p class="blurb">
-          College teams. One theme set by patients. Three days to build a demo-quality game,
-          judged by the kids it's made for — with scholarships for the teams and funds for Child Life.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn--primary" href="pages/team-signup.html">Register your team &rarr;</a>
-          <a class="btn btn--ghost" href="contents.html">Explore the Jam</a>
-          <a class="btn btn--ghost" href="pages/what-is-a-game-jam.html">What is a Game Jam?</a>
-        </div>
+<header class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+  </div>
+  <div class="hero-cap" aria-hidden="true">
+    <span>Nemours Estate — the bowling alley</span>
+    <span>Nemours Estate — the library</span>
+    <span>Nemours Estate — the chauffeur's garage</span>
+  </div>
+
+  <div class="hero-in">
+    <p class="kicker">April 4–9, 2027 · The Nemours Estate and Hospital, Wilmington, DE · Five slots</p>
+    <div class="lockup">
+      <img src="assets/img/logo/1x/Logo.png"
+           srcset="assets/img/logo/0.5x/Logo@0.5x.png 524w,
+                   assets/img/logo/0.75x/Logo@0.75x.png 786w,
+                   assets/img/logo/1x/Logo.png 1048w"
+           sizes="(max-width:880px) 56px, 76px"
+           alt="TankopaniJam badge logo" width="1048" height="1030">
+      <p class="wordmark">TankopaniJam</p>
+    </div>
+    <h1>He left it<em>to them.</em></h1>
+    <p class="sub">Five college teams. Seventy-two hours. One game each, built out of a hundred-year-old estate — for the children it was left to, and <strong>handed back to them three days later.</strong></p>
+    <div class="picks">
+      <a class="pick" href="#universities"><b>Universities</b><span>Put a team in</span></a>
+      <a class="pick" href="#students"><b>Students</b><span>Apply to build</span></a>
+      <a class="pick" href="#sponsors"><b>Sponsors</b><span>Adopt a team</span></a>
+    </div>
+  </div>
+  <span class="cue">↓</span>
+</header>
+
+<section class="creed">
+  <div class="creed-in">
+    <p class="creed-eyebrow">Why this event exists</p>
+    <div class="beats">
+      <div class="beat">
+        <p class="beat-n">01</p>
+        <p>A hundred years ago, Alfred I. duPont filled this place with everything he loved.</p>
       </div>
-    </section>
-  </main>
+      <div class="beat">
+        <p class="beat-n">02</p>
+        <p>Then he left it to children going through medical treatment.</p>
+      </div>
+      <div class="beat now">
+        <p class="beat-n">03</p>
+        <p>Now you get to build something for them, out of it.</p>
+      </div>
+    </div>
+    <p class="creed-tail"><span class="wm">TankopaniJam</span>. The Estate opens its archive — objects, music, history — and five teams get seventy-two hours to turn it into a game for the kids who are here right now. <strong>The kids write the brief. The kids judge the result.</strong> There are three ways to be part of it.</p>
+  </div>
+</section>
 
-  <div id="site-footer"></div>
-  <script src="assets/js/site.js"></script>
+<section class="doors">
+  <div class="doors-in">
+    <p class="lede">A kid watches their own idea <em>come to life.</em></p>
+    <p class="lede-sub">And a few feet away, the student who built it watches that happen. Everything else is logistics — and the games don't get archived afterward, they stay in rotation, played at the bedside.</p>
+
+    <div class="grid3">
+
+      <div class="door" id="universities">
+        <p class="door-tag">Universities</p>
+        <p class="door-echo">He left the place. You send the people who build in it.</p>
+        <h2>Put a team in the room.</h2>
+        <p>A scored external competition with a published rubric, an applied learning placement, and a portfolio artifact built for a real client — all inside one week. Your students work from a century-old archive and hand the result to the children it was left to.</p>
+        <ul>
+          <li>Documented assessment evidence per team</li>
+          <li>Syllabus-ready outcomes if you want credit</li>
+          <li>Sunday arrival, Monday–Friday on site — one academic week</li>
+          <li>No cost. Meals and equipment covered.</li>
+        </ul>
+        <a href="mailto:help@tankopanijam.com?subject=TankopaniJam%20—%20university%20team" class="btn">Request the one-pager</a>
+        <p class="deadline">Commitments close [date]</p>
+      </div>
+
+      <div class="door" id="students">
+        <p class="door-tag">Students</p>
+        <p class="door-echo">You get the keys to the house — and three days.</p>
+        <h2>Build something that gets played.</h2>
+        <p>Teams of 2–5. Any engine, any skill level. You'll be handed objects, music, and history out of the Estate's archive, and a brief written by the kids themselves. On day four you'll be standing there when they see what you made of it.</p>
+        <ul>
+          <li>Scholarships, awarded by the patient judges</li>
+          <li>A private archive nobody else can use</li>
+          <li>No laptop? We'll lend you one. No catch.</li>
+          <li>Apply as a team or solo — we'll place you</li>
+        </ul>
+        <a href="[application URL]" class="btn solid">Apply now</a>
+        <p class="deadline">Applications close [date]</p>
+      </div>
+
+      <div class="door" id="sponsors">
+        <p class="door-tag">Sponsors</p>
+        <p class="door-echo">He funded the first hundred years. This is the next one.</p>
+        <h2>Adopt a team.</h2>
+        <p>Back five students by name. Meet them, be recognized alongside their work, and appear in the credits of a game that stays in service at the bedside long after the week is over.</p>
+        <ul>
+          <li>Named on team materials and the livestream</li>
+          <li>Meet-the-team session and photo</li>
+          <li>Funds scholarships and bedside gaming</li>
+          <li>In-kind welcome — hardware, licenses, mentors</li>
+        </ul>
+        <a href="mailto:help@tankopanijam.com?subject=TankopaniJam%20—%20sponsorship" class="btn">Get the prospectus</a>
+        <p class="deadline">Sponsorships close [date]</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="week">
+  <div class="week-in">
+    <p class="week-eyebrow">April 4–9, 2027</p>
+    <h2>Three days to build. One to rest. One to hand it over.</h2>
+    <div class="week-grid">
+      <div class="day">
+        <p class="day-date">Sun · Apr 4</p>
+        <p class="day-name">Arrival</p>
+        <p class="day-note">Teams and sponsors arrive and set up.</p>
+      </div>
+      <div class="day build">
+        <p class="day-date">Mon · Apr 5</p>
+        <p class="day-name">Day 1</p>
+        <p class="day-note">Meet the patient judges. Kick-off at 11am — the brief drops and the clock starts.</p>
+      </div>
+      <div class="day build">
+        <p class="day-date">Tue · Apr 6</p>
+        <p class="day-name">Day 2</p>
+        <p class="day-note">Build. Two check-ins. This is the day it breaks.</p>
+      </div>
+      <div class="day build">
+        <p class="day-date">Wed · Apr 7</p>
+        <p class="day-name">Day 3</p>
+        <p class="day-note">Build ends 5pm. Final submission to the judges' station.</p>
+      </div>
+      <div class="day">
+        <p class="day-date">Thu · Apr 8</p>
+        <p class="day-name">Rest &amp; testing</p>
+        <p class="day-note">Teams stand down. Judges score every submission, and the kids get first play.</p>
+      </div>
+      <div class="day finale">
+        <p class="day-date">Fri · Apr 9</p>
+        <p class="day-name">Awards</p>
+        <p class="day-note">Winners announced, scholarships awarded — by the patients who wrote the brief.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <div>
+      <div class="foot-brand">
+        <img src="assets/img/logo/0.5x/Logo@0.5x.png"
+             srcset="assets/img/logo/0.5x/Logo@0.5x.png 524w,
+                     assets/img/logo/0.75x/Logo@0.75x.png 786w"
+             sizes="46px" alt="" width="524" height="515">
+        <p class="mark">TankopaniJam</p>
+      </div>
+      <p>April 4–9, 2027</p>
+      <p>The Nemours Estate and Hospital<br>Wilmington, DE</p>
+    </div>
+    <div>
+      <p style="color:#F2F1EC">Questions</p>
+      <p>Scott [last name]<br><a href="mailto:help@tankopanijam.com">help@tankopanijam.com</a> · [phone]</p>
+    </div>
+    <div>
+      <p style="color:#F2F1EC">Press</p>
+      <p><a href="mailto:[press email]">[press email]</a><br>Media access by prior arrangement.</p>
+    </div>
+  </div>
+  <p class="legal">Patient participation is voluntary and coordinated through Child Life. No patient is photographed, recorded, or streamed without documented prior guardian authorization. Imagery on this page is illustrative and does not depict identifiable patients.</p>
+</footer>
+
 </body>
 </html>

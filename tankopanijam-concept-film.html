@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TankopaniJam — Concept Film</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7E9E3;--card:#FBFBF8;--ink:#14171A;--ink-2:#3C4147;--muted:#6E7370;
+  --rule:#C9CDC4;--rule-2:#DDE0D8;--brass:#8A6A2B;--estate:#2C4F45;--flag:#8C3A2B;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:'Public Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.55}
+.wrap{max-width:1000px;margin:0 auto;padding:48px 24px 96px}
+
+.masthead{border-top:3px solid var(--ink);padding-top:22px;margin-bottom:16px}
+.eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--brass);margin:0 0 14px}
+h1{font-family:'Fraunces','Iowan Old Style',Georgia,serif;font-weight:600;
+  font-size:clamp(34px,6vw,60px);line-height:1.02;letter-spacing:-.015em;margin:0 0 14px}
+h1 em{font-style:italic;color:var(--brass)}
+.standfirst{max-width:62ch;font-size:17px;color:var(--ink-2);margin:0 0 26px}
+.meta-strip{display:flex;flex-wrap:wrap;border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);font-family:'Space Mono',monospace;font-size:11px;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.meta-strip div{padding:9px 20px 9px 0;margin-right:20px;border-right:1px solid var(--rule-2)}
+.meta-strip div:last-child{border-right:none}
+.meta-strip b{color:var(--ink);font-weight:700}
+
+.section-head{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule);
+  padding-bottom:8px;margin:52px 0 20px}
+
+.panel{background:var(--card);border:1px solid var(--rule);padding:24px 28px;margin-bottom:26px}
+.panel h2{font-family:'Fraunces',Georgia,serif;font-size:21px;font-weight:600;margin:0 0 12px;letter-spacing:-.01em}
+.panel h3{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--brass);margin:22px 0 9px;font-weight:700}
+.panel h3:first-child{margin-top:0}
+.panel p{margin:0 0 11px;font-size:15px;color:var(--ink-2);max-width:70ch}
+.panel p:last-child{margin-bottom:0}
+.panel ul{margin:0 0 11px;padding-left:19px}
+.panel li{margin-bottom:6px;font-size:15px;color:var(--ink-2);max-width:68ch}
+.panel strong{color:var(--ink);font-weight:600}
+.alarm{background:rgba(140,58,43,.06);border:1px solid rgba(140,58,43,.28)}
+.alarm h2{color:var(--flag)}
+.trade{background:rgba(44,79,69,.055);border:1px solid rgba(44,79,69,.18);padding:15px 18px;margin:8px 0}
+.trade p{margin:0;font-size:14.5px;color:var(--ink-2)}
+
+/* script */
+.script{background:var(--card);border:1px solid var(--rule);padding:30px 34px;margin-bottom:26px}
+.beat{border-bottom:1px solid var(--rule-2);padding:18px 0}
+.beat:first-of-type{padding-top:0}
+.beat:last-of-type{border-bottom:none;padding-bottom:0}
+.beat-no{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--brass);margin:0 0 8px;font-weight:700}
+.beat-vis{font-size:15px;color:var(--ink-2);margin:0 0 10px;max-width:70ch}
+.line{font-family:'Fraunces',Georgia,serif;font-size:clamp(19px,2.6vw,25px);
+  line-height:1.28;letter-spacing:-.01em;color:var(--ink);margin:10px 0 4px;max-width:24ch}
+.line.small{font-size:clamp(17px,2.2vw,21px);max-width:30ch}
+.card-lbl{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 2px}
+.silence{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);margin:8px 0 0}
+
+.draft{border:1px solid var(--rule);margin:12px 0 4px;background:#fff}
+.draft-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:9px 14px;border-bottom:1px solid var(--rule-2);background:#F6F6F2}
+.draft-bar span{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted)}
+.copy{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;font-weight:700;background:var(--ink);color:#fff;border:none;
+  padding:6px 12px;cursor:pointer}
+.copy:hover{background:var(--brass)}
+.copy:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.copy.done{background:var(--estate)}
+.draft-txt{padding:16px 18px;font-size:14px;line-height:1.62;color:var(--ink-2);
+  white-space:pre-wrap;font-family:'Public Sans',sans-serif;margin:0}
+.draft-txt.mono{font-family:'Space Mono',monospace;font-size:12.5px;line-height:1.65}
+
+.shot{background:var(--card);border:1px solid var(--rule);margin-bottom:22px;padding:22px 26px}
+.shot-head{display:flex;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--rule-2);padding-bottom:11px;margin-bottom:14px}
+.shot-head span{margin-right:20px;padding-right:20px;border-right:1px solid var(--rule-2)}
+.shot-head span:last-child{border-right:none;margin-right:0;padding-right:0}
+.shot-head b{color:var(--ink);font-weight:700}
+.shot h4{font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:600;margin:0 0 8px}
+.shot p{margin:0 0 8px;font-size:14.5px;color:var(--ink-2);max-width:70ch}
+.shot p:last-of-type{margin-bottom:0}
+
+.closing{border-top:3px solid var(--ink);margin-top:56px;padding-top:24px}
+.closing h2{font-family:'Fraunces',Georgia,serif;font-size:24px;font-weight:600;margin:0 0 12px}
+.closing p{font-size:15px;color:var(--ink-2);max-width:68ch;margin:0 0 10px}
+
+@media (max-width:640px){
+  .wrap{padding:30px 15px 60px}
+  .panel,.script,.shot{padding:18px}
+  .shot-head span,.meta-strip div{border-right:none;margin-right:14px;padding-right:0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{body{background:#fff}.wrap{max-width:none;padding:0}.copy{display:none}
+  .shot{page-break-inside:avoid;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Concept film · 90 seconds · internal buy-in</p>
+  <h1>The Brief<br><em>Script &amp; Prompt Pack</em></h1>
+  <p class="standfirst">A film of an event that hasn't happened yet, made to get the room to feel it before they fund it. Script first — it works read aloud with no footage at all. Generator prompts after, shot by shot.</p>
+  <div class="meta-strip">
+    <div>Runtime <b>~90 sec</b></div>
+    <div>Shots <b>13</b></div>
+    <div>Dialogue <b>None</b></div>
+    <div>Patient faces <b>Never shown</b></div>
+  </div>
+</header>
+
+<div class="panel alarm">
+  <h2>The one creative decision that makes this work</h2>
+  <p><strong>You never see a patient's face.</strong> Not once. Hands, a shoulder, a blanket, the back of a head, a controller being passed. The camera stays on the <em>students</em> watching, and their faces carry the whole emotional load.</p>
+  <p>This is the better film. The reaction shot has always been stronger than the subject — you don't watch the gift, you watch the person opening it. Withholding the face makes the audience lean in and finish the image themselves, and what they imagine will be more affecting than anything a generator produces.</p>
+  <p>It also solves three real problems at once. Synthetic children in medical settings is where AI video generators get uncanny and where they refuse outright. Showing hospital leadership fabricated footage of "patients" invites exactly the reaction you don't want from Legal, Comms, and Child Life. And a concept film that respects patient dignity <em>in its own construction</em> is itself an argument that you'll run the real event carefully.</p>
+  <div class="trade"><p><strong>Sequencing:</strong> show this to Child Life and Communications <em>before</em> leadership. Ten minutes, framed as "help me not screw this up." They become co-authors instead of people who found out afterward — and they're the two groups who could kill it on sight if it lands wrong.</p></div>
+</div>
+
+<div class="panel">
+  <h2>Before the film: the script works alone</h2>
+  <p>You asked whether the script by itself could do the job. It can, and in some rooms it's the stronger play — reading it aloud costs nothing, can't misfire, and puts the images in people's heads where they're always better.</p>
+  <p>If you open a meeting cold by reading the beats below with no preamble, you'll get most of the effect. The film is for the rooms you're not in.</p>
+</div>
+
+<h2 class="section-head">The script</h2>
+
+<div class="script">
+
+  <div class="beat">
+    <p class="beat-no">01 · Black · 0:00–0:06</p>
+    <p class="beat-vis">Black frame. Room tone. Somewhere, a clock mechanism ticking — old, uneven, mechanical.</p>
+    <p class="card-lbl">Title card</p>
+    <p class="line">A hundred years ago,<br>someone filled a house<br>with everything they loved.</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">02 · The archive · 0:06–0:16</p>
+    <p class="beat-vis">Slow push through a shuttered room. Dust in a shaft of light. A brass instrument in a case. Sheet music, handwritten, foxed at the edges. A clock face. Warm amber light, deep shadow. Nothing moves but the dust.</p>
+    <p class="card-lbl">Title card</p>
+    <p class="line">Then locked the door.</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">03 · Cut · 0:16–0:22</p>
+    <p class="beat-vis">Hard cut. Everything goes cold — blue-grey daylight, clean surfaces. A hospital corridor at 7am, empty. An IV pole. A window.</p>
+    <p class="card-lbl">Title card</p>
+    <p class="line small">Four miles away,<br>a kid is waiting.</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">04 · Waiting · 0:22–0:30</p>
+    <p class="beat-vis">A small hand resting on a bedrail. Fingers on a blanket. A window with rain. Held slightly too long — long enough to be uncomfortable.</p>
+    <p class="card-lbl">Title card</p>
+    <p class="line small">Waiting is the part<br>nobody makes<br>a game about.</p>
+    <p class="silence">— hold on black, 1.5 sec, silence —</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">05 · The brief · 0:30–0:40</p>
+    <p class="beat-vis">A circle of chairs in a bright room. Backs of heads, teenagers. A whiteboard. A young hand lifts a marker and writes one word. We see the hand and the word — never the face.</p>
+    <p class="card-lbl">Title card</p>
+    <p class="line">So we asked them<br>to write the brief.</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">06 · Ignition · 0:40–0:47</p>
+    <p class="beat-vis">Hard cut, tempo breaks. Five tables. Laptops opening in sequence. Backpacks hitting the floor. Students in their twenties, energy, motion, handheld camera.</p>
+    <p class="card-lbl">Title card</p>
+    <p class="line">72 hours.</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">07 · The constraint · 0:47–0:57</p>
+    <p class="beat-vis">Split-screen dissolves. The brass instrument beside its 3D wireframe. The clock mechanism rotating in a modeling viewport. Handwritten sheet music becoming an audio waveform. Warm archive amber bleeding into cold screen light for the first time.</p>
+    <p class="card-lbl">Title card</p>
+    <p class="line small">Build it out<br>of that house.</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">08 · The wall · 0:57–1:05</p>
+    <p class="beat-vis">Night. A face lit only by a monitor. Empty cans. Someone asleep under a table, hoodie over their eyes. A whiteboard covered in crossed-out ideas. No music — just a fan, and typing.</p>
+    <p class="card-lbl">Title card</p>
+    <p class="line small">Day two<br>is when it breaks.</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">09 · Submission · 1:05–1:10</p>
+    <p class="beat-vis">Daylight. An external hard drive placed into an open palm. Held. Released. Five hands, five drives, in quick succession.</p>
+    <p class="silence">— no title card —</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">10 · The handoff · 1:10–1:20</p>
+    <p class="beat-vis">An atrium. Big screen. A controller passes from an adult hand to a much smaller one. <strong>Camera stays wide and low, behind.</strong> We see the back of a small head, the screen, and — in focus, past them — the students watching.</p>
+    <p class="card-lbl">Title card</p>
+    <p class="line">Then we gave it<br>back to them.</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">11 · Reaction · 1:20–1:28</p>
+    <p class="beat-vis">This is the shot the whole film is built to earn. Students' faces, in close. One with a hand over their mouth. One who can't hold it together. One laughing with tears on their face. We never cut back to what they're looking at. Warm and cold light finally in the same frame.</p>
+    <p class="silence">— no title card, let it play —</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">12 · Recognition · 1:28–1:36</p>
+    <p class="beat-vis">Reverse. The screen itself, close. On it, an object from the archive — the clock, the instrument — rebuilt and moving inside a game. Reflected faintly in the dark glass, the small silhouette of someone leaning forward. A small hand rises into frame and points at it.</p>
+    <p class="card-lbl">Title card</p>
+    <p class="line small">They said<br>what would help.</p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">12b · Both sides · 1:36–1:42</p>
+    <p class="beat-vis">Cut back once more to a student's face. Not crying now — just watching, completely still. Then back to the screen, still playing.</p>
+    <p class="card-lbl">Title card</p>
+    <p class="line">Somebody<br><em>built it.</em></p>
+  </div>
+
+  <div class="beat">
+    <p class="beat-no">13 · Out · 1:34–1:42</p>
+    <p class="beat-vis">Wide. The whole atrium. Students, staff, families, noise. Slow pull back. Fade.</p>
+    <p class="card-lbl">Title cards, in sequence</p>
+    <p class="line">TANKOPANIJAM</p>
+    <p class="line small">April 4–9, 2027 · Nemours Estate, Wilmington, DE</p>
+    <p class="line small">First one.<br>Let's go build it.</p>
+  </div>
+
+</div>
+
+<div class="panel">
+  <h3>Read-aloud version</h3>
+  <p>For opening a meeting cold, with no screen. Read it slowly. Don't explain it first, and don't explain it after — let the room speak before you do.</p>
+  <div class="draft">
+   <div class="draft-bar"><span>Cold open · ~75 seconds spoken</span><button class="copy">Copy</button></div>
+   <p class="draft-txt">A hundred years ago, someone filled a house with everything they loved.
+
+Then locked the door.
+
+Four miles away, a kid is waiting.
+
+Waiting is the part nobody makes a game about.
+
+So we asked them to write the brief.
+
+Five college teams. Seventy-two hours. Build it out of that house — its objects, its history, its music.
+
+Day two is when it breaks. It always does.
+
+Day three, they hand in a hard drive.
+
+Day four, we give it back to them. A controller goes from an adult's hand into a much smaller one.
+
+And a kid leans forward and points at the screen, because something on it is theirs. They said what would help, and somebody built it.
+
+We don't watch the kid. We watch the students watching the kid.
+
+That's the event. We're doing it in April.
+
+I'd like you in it.</p>
+  </div>
+</div>
+
+<h2 class="section-head">Generator prompts</h2>
+
+<div class="panel">
+  <h2>How to run this</h2>
+  <h3>Workflow</h3>
+  <ul>
+    <li>Prepend the <strong>style block</strong> to every shot prompt. Consistency across clips is the hardest part of AI video and a fixed style header is most of the solution.</li>
+    <li>Generate <strong>3–4 variants per shot</strong>. Expect to use one in four. Thirteen shots means budgeting for roughly fifty generations.</li>
+    <li>Clips run 5–10 seconds. Cut them down hard in the edit — most of these shots want 2–4 seconds on screen.</li>
+    <li><strong>Add every title card in post.</strong> Generators still mangle text. Do them in Resolve, where you have full control over type and timing.</li>
+  </ul>
+  <h3>Two rules that keep it clean</h3>
+  <ul>
+    <li><strong>Never prompt for a child's face.</strong> Describe hands, shoulders, the back of a head, a silhouette. If a generator returns a visible child's face, discard the clip — no exceptions, even if it's beautiful.</li>
+    <li><strong>Never prompt for the hospital by name or brand.</strong> Generic clinical environment only. This is a concept film, not documentation, and it should not look like it depicts a real place.</li>
+  </ul>
+  <h3>Sound</h3>
+  <p>Don't license anything for an internal concept piece. Generate an original score — you already work in Suno. What the film needs: sparse piano over a mechanical clock pulse for the first thirty seconds, a hard tempo break at Beat 06, strings entering at Beat 10 and resolving at 11. Ask for instrumental, no vocals, cinematic, ~100 seconds.</p>
+</div>
+
+<div class="panel">
+  <h3>Style block — prepend to every shot</h3>
+  <div class="draft">
+   <div class="draft-bar"><span>Style header</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">STYLE: Cinematic documentary. Shot on 35mm film, anamorphic,
+shallow depth of field, natural available light only. Muted
+desaturated palette. Fine film grain. Slight handheld motion,
+no camera shake. Realistic, restrained, unglamorous. No
+lens flare, no slow-motion, no drone shots.
+
+COLOR LOGIC (important, keep consistent):
+  Archive/estate scenes  = warm amber, tungsten, deep shadow
+  Hospital scenes        = cool blue-grey, clean, flat daylight
+  Final atrium scenes    = both temperatures in one frame
+
+FORMAT: 16:9, 24fps, 5-8 seconds.
+
+NEGATIVE: no on-screen text, no logos, no branding, no
+children's faces, no visible medical procedures, no blood,
+no distress, no stock-footage look, no corporate glossy
+lighting, no smiling-at-camera, no AI sheen.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>01</b></span><span>Beat <b>Black</b></span><span>Cut to <b>0:00–0:06</b></span></div>
+  <h4>Nothing yet</h4>
+  <p>No generation needed. Black frame, room tone, and a mechanical clock tick. Build it in the edit. The six seconds of nothing is what makes Shot 02 land.</p>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>02</b></span><span>Beat <b>02</b></span><span>Use <b>3–4 sec</b></span></div>
+  <h4>The shuttered room</h4>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Slow forward dolly through a shuttered room in a grand
+early-1900s house. Heavy furniture under white dust sheets.
+A single shaft of afternoon light through a gap in wooden
+shutters, thick with floating dust. Dark wood paneling.
+Nothing moves except the dust. Deep shadow, warm amber
+highlights, high contrast. Silent, still, abandoned.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>03</b></span><span>Beat <b>02</b></span><span>Use <b>2 sec each</b></span></div>
+  <h4>Archive objects — generate all four, cut fast</h4>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 3a brass</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Extreme close-up, macro. An antique brass band instrument
+resting in a worn velvet-lined case. Tarnished, fingerprinted,
+clearly played for years. Slow drift across the valves.
+Single warm light source raking from the left. Dust visible
+on the surface. Museum stillness.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 3b sheet music</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Macro close-up of handwritten sheet music on aged paper,
+foxed and yellowed at the edges, ink faded to brown. Slow
+lateral drift across the staves. Shallow focus — only a
+few bars sharp. Warm lamplight, deep shadow at the frame
+edges. No legible words.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 3c clock</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Extreme close-up of the exposed brass mechanism of an
+antique mantel clock. Gears turning slowly, escapement
+ticking. Oil-darkened metal, tiny reflections. Very shallow
+depth of field. Warm tungsten light. Mechanical, patient,
+alive.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 3d the door</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Static wide shot. A tall, heavy wooden door in a grand
+old house, closed. Ornate brass handle. Warm light spilling
+from beneath it into a dark hallway. Nobody present. Held,
+motionless, slightly too long.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>04</b></span><span>Beat <b>03</b></span><span>Cut <b>Hard</b></span></div>
+  <h4>Temperature break — corridor</h4>
+  <p>This cut is the film's spine. Everything warm becomes cold in one frame. Don't dissolve it.</p>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Empty hospital corridor, early morning. Cool blue-grey
+daylight through a window at the far end. Clean vinyl floor
+with a soft reflection. An IV pole standing alone against
+the wall. No people. Completely still. Flat, quiet,
+institutional. Generic — no signage, no logos, no branding.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>05</b></span><span>Beat <b>04</b></span><span>Faces <b>None</b></span></div>
+  <h4>Waiting — hands only</h4>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 5a</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Close-up. A young person's hand resting on a metal bed rail,
+fingers relaxed and still. Soft cotton blanket visible below.
+Cool window light from the left. Extremely shallow focus —
+only the fingertips sharp. No face, no body, no medical
+equipment visible. Quiet and still.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 5b</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+A window streaked with rain, seen from inside a dim room.
+Grey daylight outside, out of focus. A blurred, unidentifiable
+shape in the foreground suggesting someone seated nearby,
+unrecognisable. Cool desaturated palette. Held static. Melancholy,
+patient, unhurried.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>06</b></span><span>Beat <b>05</b></span><span>The turn <b>Here</b></span></div>
+  <h4>The brief — the word on the board</h4>
+  <p>Generate the room, then add the written word in post. Generators can't be trusted with a single legible word, and this one has to be perfect.</p>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 6a the room</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+A bright, plain meeting room. A loose circle of mismatched
+chairs, occupied by teenagers seen only from behind — backs
+of heads and shoulders, no faces visible at any point.
+A large blank whiteboard on the far wall. Natural daylight
+from a window off frame. Camera static, at seated height,
+behind the circle. Informal, real, unposed.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 6b the hand</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Close-up on a young person's hand holding a black dry-erase
+marker, raised to a blank whiteboard, about to write. Just
+the hand, wrist and forearm — no face, no body. Bright even
+daylight. Shallow focus on the marker tip. Hold the moment
+just before contact.
+
+Note: leave the board blank. Word added in post.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>07</b></span><span>Beat <b>06</b></span><span>Tempo <b>Breaks</b></span></div>
+  <h4>Ignition</h4>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Handheld, energetic. A large open room with five long tables.
+College students in their twenties dropping backpacks, pulling
+out chairs, opening laptops in quick succession. Motion,
+overlap, purpose. Mixed daylight and screen glow. Faces
+visible and animated — these are adults. Documentary
+immediacy, nothing staged.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>08</b></span><span>Beat <b>07</b></span><span>Use <b>2 sec each</b></span></div>
+  <h4>Archive becomes engine</h4>
+  <p>The thesis of the whole event in three shots. Match the framing of Shot 03 exactly so the dissolves land.</p>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 8a wireframe</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+A computer monitor showing a 3D modeling viewport. A brass
+band instrument rendered as a rotating wireframe mesh on a
+dark grey background. Screen glow is the only light source.
+Camera slowly pushes in on the screen. Cold blue light, warm
+brass tones inside the render. Technical, focused.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 8b clock in engine</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+A monitor showing an antique clock mechanism recreated in
+3D, slowly rotating in a game engine viewport. Half the
+gears are textured, half still untextured grey — clearly
+work in progress. Screen glow on a dark desk. Push in slowly.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 8c music to waveform</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Close-up of a monitor showing an audio editing timeline with
+a visible waveform. Warm amber glow from a nearby lamp mixing
+with cold screen light on the desk surface. Aged sheet music
+lying beside the keyboard, partly in frame, out of focus.
+Slow drift. The two light temperatures meeting.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>09</b></span><span>Beat <b>08</b></span><span>Sound <b>Drops out</b></span></div>
+  <h4>The wall — day two</h4>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 9a the face</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Night. A college student in their twenties sitting alone at
+a laptop, face lit only by the monitor. Exhausted, unshaven,
+staring at the screen without moving. Everything else in the
+room in darkness. Empty cans on the desk. Not sad — depleted
+and still working. Very shallow focus.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 9b asleep</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Wide, low angle. A large room at night, mostly dark. One
+person asleep on the floor under a table, hoodie pulled over
+their eyes, jacket for a pillow. In the background, two
+others still working at glowing screens. Cold blue light,
+long shadows. Quiet, unglamorous, real.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 9c the whiteboard</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+A whiteboard covered in dense handwritten notes and diagrams,
+much of it crossed out and rewritten. Illegible, deliberately
+out of focus at the edges. Harsh overhead fluorescent light.
+Slow lateral drift. No readable words.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>10</b></span><span>Beat <b>09</b></span><span>Runtime <b>3 sec</b></span></div>
+  <h4>Submission</h4>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Extreme close-up. An external hard drive placed carefully
+into an open adult palm. The hand closes around it. Held for
+a beat, then released. Clean daylight. Shallow focus on the
+hands only — no faces, no bodies. Deliberate and ceremonial.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>11</b></span><span>Beat <b>10</b></span><span>Camera <b>Stays behind</b></span></div>
+  <h4>The handoff</h4>
+  <p>The hardest shot to get right. If any generation shows the child's face, discard it — that's the rule the whole film rests on.</p>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 11a the controller</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Extreme close-up of hands only. A game controller passing
+from a large adult hand into a much smaller child's hand.
+Just the hands and forearms — frame ends at the wrists, no
+faces, no bodies, no faces anywhere in shot. Warm and cool
+light mixing on the skin. Held, gentle, unhurried.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 11b behind</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Wide, low camera positioned BEHIND a small seated figure,
+shot entirely from the back — only the back of a head and
+shoulders in silhouette, no face visible at any point. Ahead
+of them, a large bright screen in an open atrium. Standing
+further back, in focus, a small group of college students
+watching intently. Warm and cool light in the same frame.
+Background figures softly out of focus.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>12</b></span><span>Beat <b>11</b></span><span>Priority <b>Highest</b></span></div>
+  <h4>The reaction — generate more variants here than anywhere else</h4>
+  <p>Everything before this exists to make this shot mean something. Budget eight to ten generations. Use the two best.</p>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 12a hand over mouth</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Close-up on a college student in their twenties watching
+something off-camera, hand rising slowly to cover their
+mouth. Overwhelmed, moved, trying to hold composure. Eyes
+bright. Natural mixed light, warm and cool. Very shallow
+focus. Nothing performed — a real, involuntary reaction.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 12b breaking</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Close-up on a young adult watching something off-camera,
+laughing and crying at the same time, wiping their eyes
+with the back of a wrist. Joy and release together. Another
+person's shoulder blurred in the foreground. Warm side
+light. Handheld, slight movement. Documentary, unposed.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 12c the group</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+A small group of college students standing close together,
+all watching the same thing off-camera. Varied reactions —
+one grinning, one still, one with a hand on another's
+shoulder. Nobody looking at the camera. Warm and cool light
+mixing. Shallow focus on the middle of the group.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>13</b></span><span>Beat <b>12</b></span><span>The image <b>The whole pitch</b></span></div>
+  <h4>Recognition — a kid seeing their own idea</h4>
+  <p>This replaces the earlier scholarship-check shot. The check was a transaction; this is the actual payoff. Recognition works both directions here — the kid sees their idea alive, the student sees that happen.</p>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 13a the screen</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Close-up on a large dark screen displaying a stylised 3D
+game environment containing an antique clock mechanism,
+gently animating. Faintly reflected in the dark glass, the
+soft out-of-focus silhouette of a small figure leaning
+forward — unrecognisable, no facial detail whatsoever.
+Warm screen glow spilling outward. Held, quiet.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 13b the point</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+A small child's hand and forearm rising into frame from
+below, index finger extended, pointing at a bright screen
+just out of focus behind it. Frame ends at the elbow —
+no face, no body, no head in shot. Warm screen light on
+the skin. Simple, held, unhurried.</p>
+  </div>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt · 13c the witness</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Close-up on a college student in their twenties, completely
+still, watching something off-camera. Not crying, not
+smiling — absorbed, quiet, slightly stunned. Warm light on
+one side of the face, cool on the other. Very shallow
+focus. The stillness is the point.</p>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="shot-head"><span>Shot <b>14</b></span><span>Beat <b>13</b></span><span>Out <b>Slow</b></span></div>
+  <h4>Wide, and out</h4>
+  <div class="draft">
+   <div class="draft-bar"><span>Prompt</span><button class="copy">Copy</button></div>
+   <p class="draft-txt mono">[STYLE BLOCK]
+
+Very wide shot of a bright open hospital atrium, high
+ceilings, natural light from above. A crowd of forty or so
+people — college students, staff, families — gathered
+loosely around a large screen. Applause, movement, warmth.
+Camera slowly pulls back and rises slightly. Faces small
+and indistinct at this distance. Generic architecture,
+no signage or branding. Warm and cool light together.</p>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>Edit notes</h2>
+  <h3>The three cuts that carry it</h3>
+  <ul>
+    <li><strong>Shot 03 → 04.</strong> Warm to cold, no transition. This is the whole premise in one frame change.</li>
+    <li><strong>Shot 06 → 07.</strong> Silence to noise. Let Beat 05 sit a full beat longer than feels comfortable before you break it.</li>
+    <li><strong>Shot 11 → 12.</strong> Cutting <em>away</em> from the screen to the students' faces. If you're tempted to cut back to show what they're seeing, don't — the restraint is the payoff.</li>
+  </ul>
+  <h3>Pacing</h3>
+  <p>First half slow, second half accelerating, then a hard brake at Beat 11. The reaction shot should feel like the film stops moving. Two seconds longer than comfortable.</p>
+  <h3>Type</h3>
+  <p>Title cards in post. Simple, centered, generous margins, hold long enough to read twice. Keep them quiet — the words are doing enough work without help.</p>
+</div>
+
+<section class="closing">
+  <h2>How to use it in the room</h2>
+  <p><strong>Say nothing first.</strong> No setup, no context, no "so I put together a little concept piece." Dim the lights and play it. The instinct to pre-explain is the instinct that kills it.</p>
+  <p><strong>Then one sentence:</strong> "None of that happened yet. It happens in April, and I need your help to make it real." Stop talking. Let them fill the silence — whoever speaks first is your strongest ally in that room, and you've just found out who.</p>
+  <p><strong>Label it honestly on the file itself.</strong> Concept film, illustrative, not documentation, no real patients depicted. Put it in the first frame or the file name. That single line is the difference between a bold pitch and a problem — and it costs you nothing, because everyone in the room already knows the event hasn't happened.</p>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var txt = btn.closest('.draft').querySelector('.draft-txt').textContent;
+    var done = function(){
+      btn.textContent = 'Copied';
+      btn.classList.add('done');
+      setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+    };
+    var fallback = function(){
+      var ta = document.createElement('textarea');
+      ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); }
+      catch(e){ btn.textContent = 'Select manually'; }
+      document.body.removeChild(ta);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(done).catch(fallback);
+    } else { fallback(); }
+  });
+});
+</script>
+</body>
+</html>
