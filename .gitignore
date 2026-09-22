@@ -4,8 +4,12 @@ desktop.ini
 .DS_Store
 *.swp
 ~ai-*.tmp
+~$*
 .vscode/
 .idea/
+
+# Private partnership material — this repo is PUBLIC, keep asks out of it
+partnerships/
 
 # Local media — source footage & full-res photography, too big for the repo
 videos/
