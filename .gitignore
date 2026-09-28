@@ -11,6 +11,12 @@ desktop.ini
 # Private partnership material — this repo is PUBLIC, keep asks out of it
 partnerships/
 
+# Internal college outreach contact list — not for the live site
+tankopanijam-outreach.html
+
+# Working reports and internal docs — never upload anywhere
+working reports and other docs/
+
 # Local media — source footage & full-res photography, too big for the repo
 videos/
 images/
